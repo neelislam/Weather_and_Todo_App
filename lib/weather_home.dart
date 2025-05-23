@@ -337,12 +337,7 @@ class _WeatherHomeState extends State<WeatherHome> {
         title: Text(_city.isEmpty ? 'Weather App' : 'Weather in $_city'),
         centerTitle: true,
         actions: [
-          // Theme toggle button
-          IconButton(
-            icon: Icon(widget.isDarkMode ? Icons.light_mode : Icons.dark_mode),
-            onPressed: widget.toggleTheme,
-            tooltip: 'Toggle Theme',
-          ),
+
           // Add button to navigate to ToDoList
           IconButton(
             icon: const Icon(Icons.list_alt), // Icon for the to-do list
@@ -350,6 +345,11 @@ class _WeatherHomeState extends State<WeatherHome> {
             tooltip: 'ToDo List',
           ),
           // Sign out button
+          IconButton(
+            icon: Icon(widget.isDarkMode ? Icons.light_mode : Icons.dark_mode),
+            onPressed: widget.toggleTheme,
+            tooltip: 'Toggle Theme',
+          ),
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: _signOut,
@@ -381,7 +381,7 @@ class _WeatherHomeState extends State<WeatherHome> {
     );
   }
 
-  // Builds the city search input field
+  //City search input field
   Widget _buildSearchBar() {
     return TextField(
       controller: _cityController,
@@ -415,118 +415,106 @@ class _WeatherHomeState extends State<WeatherHome> {
     );
   }
 
-  // Builds the "Use Current Location" button
-
 
   // Builds the main weather information display
   Widget _buildWeatherInfo() {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start, // This column is for the internal layout of _buildWeatherInfo
       children: [
         //Glassmorphism box for main weather info
-        Container(
-          margin: EdgeInsets.symmetric(horizontal: 10),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.2), //Shadow for the glass effect
-                blurRadius: 20,
-                spreadRadius: 5,
-                offset: Offset(0, 8),
-              ),
-            ],
-          ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10), //Apply blur effect
-              child: Container(
-                padding: EdgeInsets.all(24.0),
-                decoration: BoxDecoration(
-                  //Translucent background color based on theme's card color
-                  color: Theme.of(context).cardColor.withOpacity(0.3),
-                  border: Border.all(
-                    // Subtle border for the glass effect
-                    color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
-                    width: 1.5,
-                  ),
-                  borderRadius: BorderRadius.circular(20),
+        SizedBox(
+          width: MediaQuery.of(context).size.width * 0.9, // 90% of screen width
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                  blurRadius: 20,
+                  spreadRadius: 5,
+                  offset: Offset(0, 8),
                 ),
-                child: Column(
-                  //crossAxisAlignment: CrossAxisAlignment.center,
-                  //mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Icon(
-                      _getWeatherIcon(_weatherMain), // Dynamic weather icon
-                      size: 80,
-                      color: Theme.of(context).colorScheme.primary,
+              ],
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                child: Container(
+                  padding: EdgeInsets.all(24.0),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).cardColor.withOpacity(0.3),
+                    border: Border.all(
+                      color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
+                      width: 1.5,
                     ),
-                    SizedBox(height: 12),
-                    Text(
-                      _weatherMain,
-                      style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-                      //textAlign: TextAlign.right,
-                    ),
-                  SizedBox(height: 5),
-                    Text(
-                      _weatherDescription.capitalize(), //Capitalize first letter
-                      style: TextStyle(
-                          fontSize: 20,
-                          color:
-                          Theme.of(context).textTheme.bodyMedium?.color?.withOpacity(0.8)),
-                      //textAlign: TextAlign.right,
-                    ),
-                     SizedBox(height: 12),
-                    Text(
-                      '${_temperature.toStringAsFixed(1)} °C', // Format temperature to one decimal
-                      style:  TextStyle(fontSize: 48, fontWeight: FontWeight.bold, color: Colors.white),
-                    ),
-                  ],
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start, // Align content within this inner column to the start
+                    children: [
+                      Icon(
+                        _getWeatherIcon(_weatherMain),
+                        size: 80,
+                        color: Theme.of(context).colorScheme.primary,
+
+                      ),
+                      SizedBox(height: 12),
+                      Text(
+                        _weatherMain,
+                        style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(height: 5),
+                      Text(
+                        _weatherDescription.capitalize(),
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Theme.of(context).textTheme.bodyMedium?.color?.withOpacity(0.8)),
+                      ),
+                      SizedBox(height: 12),
+                      Text(
+                        '${_temperature.toStringAsFixed(1)} °C',
+                        style:  TextStyle(fontSize: 48, fontWeight: FontWeight.bold, color: Colors.white),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
         ),
-         SizedBox(height: 20), // Space between glass box and tip card
-        //Existing Card for Quick Tip, with adjusted translucency
-        Card(
-          elevation: 5,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-          margin:  EdgeInsets.symmetric(horizontal: 10),
-          color: widget.isDarkMode
-              ? Colors.grey[800]!.withOpacity(0.5) // Make it more translucent for dark mode
-              : Colors.blue.shade50!.withOpacity(0.5), // Make it more translucent for light mode
-          child: Padding(
-            padding:  EdgeInsets.all(20.0),
-            child: Column(
-              children: [
-                // Text(
-                //   'Quick Tip:',
-                //   style: TextStyle(
-                //       fontSize: 20,
-                //       fontWeight: FontWeight.bold,
-                //       fontStyle: FontStyle.italic,
-                //       color: Colors.black),
-                //   textAlign: TextAlign.left,//Theme.of(context).colorScheme.primary),
-                // ),
-              SizedBox(height: 10),
-                Text(
-                  'Quick Tips: $_suggestion',
-                  style: TextStyle(
-                      fontSize: 24,
-                      //fontStyle: FontStyle.italic,
-                      color: Colors.white,
-                    fontWeight: FontWeight.bold,) , //Theme.of(context).textTheme.bodyMedium?.color),
-                  //textAlign: TextAlign.left,
-                ),
-              ],
+        SizedBox(height: 20), // Space between glass box and tip card
+
+        // Existing Card for Quick Tip, with adjusted translucency
+        SizedBox(
+          width: MediaQuery.of(context).size.width * 0.9, //90% of screen width
+          child: Card(
+            elevation: 5,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            color: widget.isDarkMode
+                ? Colors.grey[800]!.withOpacity(0.5)
+                : Colors.blue.shade50!.withOpacity(0.5),
+            child: Padding(
+              padding:  EdgeInsets.all(20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start, // Align tip text to the start
+                children: [
+                  Text(
+                    'Quick Tips: $_suggestion',
+                    style: TextStyle(
+                        fontSize: 24,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
       ],
     );
   }
+
   Widget _buildLocationButton() {
     return ElevatedButton.icon(
       onPressed: _getCurrentLocationWeather,
