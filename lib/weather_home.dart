@@ -531,7 +531,7 @@ class _WeatherHomeState extends State<WeatherHome> {
     return ElevatedButton.icon(
       onPressed: _getCurrentLocationWeather,
       icon: const Icon(Icons.location_on),
-      label: const Text('Use Current Location'),
+      label: const Text('Use your current Location'),
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.symmetric(vertical: 15),
         shape: RoundedRectangleBorder(
