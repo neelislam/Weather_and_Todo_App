@@ -106,7 +106,7 @@ class _SignInPageState extends State<SignInPage> {
       ),
       body: Center( // Center the content on the screen
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24.0), // Consistent padding
+          padding:  EdgeInsets.all(24.0), // Consistent padding
           child: Form(
             key: _formKey,
             child: Column(
@@ -119,8 +119,8 @@ class _SignInPageState extends State<SignInPage> {
                   height: 150, // Set a fixed height
                   fit: BoxFit.contain, // Ensure the image fits within the bounds
                 ),
-                const SizedBox(height: 20), // Spacing after image
-                const Text(
+                SizedBox(height: 20), // Spacing after image
+                 Text(
                   'Welcome To Weather App',
                   style: TextStyle(
                     color: Colors.green,
@@ -128,12 +128,12 @@ class _SignInPageState extends State<SignInPage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 40), // Spacing from top
+                 SizedBox(height: 40), // Spacing from top
                 TextFormField(
                   controller: _emailController,
                   decoration: InputDecoration(
                     hintText: 'Email',
-                    prefixIcon: const Icon(Icons.email),
+                    prefixIcon:  Icon(Icons.email),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8.0),
                     ),
@@ -152,12 +152,12 @@ class _SignInPageState extends State<SignInPage> {
                     return null;
                   },
                 ),
-                const SizedBox(height: 20), // Spacing between fields
+                 SizedBox(height: 20), // Spacing between fields
                 TextFormField(
                   controller: _passwordController,
                   decoration: InputDecoration(
                     hintText: 'Password',
-                    prefixIcon: const Icon(Icons.lock),
+                    prefixIcon:  Icon(Icons.lock),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8.0),
                     ),
@@ -176,9 +176,9 @@ class _SignInPageState extends State<SignInPage> {
                     return null;
                   },
                 ),
-                const SizedBox(height: 30), // Spacing before buttons
+                 SizedBox(height: 30), // Spacing before buttons
                 _isLoading
-                    ? const LinearProgressIndicator() // Show loading indicator
+                    ?  LinearProgressIndicator() // Show loading indicator
                     : Column(
                   children: [
                     SizedBox(
@@ -189,48 +189,48 @@ class _SignInPageState extends State<SignInPage> {
                           // Use widget.isDarkMode here
                           foregroundColor: widget.isDarkMode ? Colors.white : Colors.black,
                           backgroundColor: widget.isDarkMode ? Colors.blueAccent : Colors.lightBlue,
-                          padding: const EdgeInsets.symmetric(vertical: 16.0),
+                          padding: EdgeInsets.symmetric(vertical: 16.0),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
                           elevation: 5, // Add a subtle shadow
                         ),
-                        child: const Text(
+                        child:  Text(
                           "Sign In",
                           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),
-                    const SizedBox(height: 15), // Spacing between buttons
+                    SizedBox(height: 15), // Spacing between buttons
                     SizedBox(
                       width: double.infinity,
                       child: OutlinedButton( // Use OutlinedButton for secondary action
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const SignUpPage()),
+                            MaterialPageRoute(builder: (context) =>  SignUpPage()),
                           );
                         },
                         style: OutlinedButton.styleFrom(
                           foregroundColor: Theme.of(context).textTheme.bodyLarge?.color, // Inherit text color
                           side: BorderSide(color: Theme.of(context).colorScheme.primary), // Border color
-                          padding: const EdgeInsets.symmetric(vertical: 16.0),
+                          padding:  EdgeInsets.symmetric(vertical: 16.0),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ),
-                        child: const Text(
+                        child:  Text(
                           "Create Account",
                           style: TextStyle(fontSize: 18),
                         ),
                       ),
                     ),
-                    const SizedBox(height: 25), // Spacing for OR divider
+                     SizedBox(height: 25), // Spacing for OR divider
                     Row(
                       children: [
-                        const Expanded(child: Divider()),
+                         Expanded(child: Divider()),
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                          padding:  EdgeInsets.symmetric(horizontal: 10.0),
                           child: Text(
                             "OR",
                             style: TextStyle(
@@ -238,23 +238,23 @@ class _SignInPageState extends State<SignInPage> {
                             ),
                           ),
                         ),
-                        const Expanded(child: Divider()),
+                         Expanded(child: Divider()),
                       ],
                     ),
-                    const SizedBox(height: 25),
+                    SizedBox(height: 25),
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton.icon(
                         onPressed: _signInAsGuest,
-                        icon: const Icon(Icons.person_outline),
-                        label: const Text(
+                        icon: Icon(Icons.person_outline),
+                        label: Text(
                           "Continue as Guest",
                           style: TextStyle(fontSize: 18),
                         ),
                         style: ElevatedButton.styleFrom(
                           foregroundColor: Colors.black, // Always black for guest button text
                           backgroundColor: Colors.yellow, // Distinct color for guest login
-                          padding: const EdgeInsets.symmetric(vertical: 16.0),
+                          padding:  EdgeInsets.symmetric(vertical: 16.0),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),

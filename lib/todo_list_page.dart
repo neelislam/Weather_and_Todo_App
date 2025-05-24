@@ -27,7 +27,7 @@ class toDolist extends StatefulWidget {
   State<toDolist> createState() => _toDolistState();
 }
 
-// The State class for the toDolist widget, managing the reminder list and UI logic
+// The State class for the to Do list widget, managing the reminder list and UI logic
 class _toDolistState extends State<toDolist> {
   // Controllers for the text input fields
   final TextEditingController _titleController = TextEditingController();
@@ -107,15 +107,15 @@ class _toDolistState extends State<toDolist> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text("Delete Confirmation"),
-          content: const Text("Are you sure you want to delete this Note?", style: TextStyle(color: Colors.black),),
+          title:  Text("Delete Confirmation"),
+          content:  Text("Are you sure you want to delete this Note?", style: TextStyle(color: Colors.black),),
           actions: [
             // Cancel button
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop(); // Close the dialog
               },
-              child: const Text("Cancel"),
+              child:  Text("Cancel"),
             ),
             // Delete button
             TextButton(
@@ -126,11 +126,11 @@ class _toDolistState extends State<toDolist> {
                 _saveReminders(); // Save reminders after deleting
                 Navigator.of(context).pop(); // Close the dialog
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Reminder deleted.')),
+                   SnackBar(content: Text('Reminder deleted.')),
                 );
               },
-              child: const Text("Delete"),
-              style: TextButton.styleFrom(foregroundColor: Colors.red), // Style the delete button
+              style: TextButton.styleFrom(foregroundColor: Colors.red),
+              child: Text("Delete"), // Style the delete button
             ),
           ],
         );
@@ -154,23 +154,23 @@ class _toDolistState extends State<toDolist> {
             // Text field for Title input
             TextField(
               controller: _titleController, // Changed to _titleController
-              decoration: const InputDecoration(
+              decoration:  InputDecoration(
                 labelText: "Title",
                 border: OutlineInputBorder(),
               ),
             ),
-            const SizedBox(height: 10), // Spacing
+           SizedBox(height: 10), // Spacing
             // Text field for Description input
             TextField(
               controller: _descriptionController, // Changed to _descriptionController
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelText: "Description",
                 border: OutlineInputBorder(),
               ),
               maxLines: null, // Allows for multiline input
               keyboardType: TextInputType.multiline, // Sets keyboard type for multiline
             ),
-            const SizedBox(height: 10), // Spacing
+             SizedBox(height: 10), // Spacing
             // Button to add a new reminder
             SizedBox(
               width: double.infinity, // Make button take full width
@@ -181,7 +181,7 @@ class _toDolistState extends State<toDolist> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5.0),
                   ),
-                  padding: const EdgeInsets.symmetric(vertical: 12.0), // Add vertical padding
+                  padding: EdgeInsets.symmetric(vertical: 12.0), // Add vertical padding
                 ),
                 child: const Text(
                   "Add",

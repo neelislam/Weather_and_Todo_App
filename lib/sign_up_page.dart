@@ -73,6 +73,7 @@ class _SignUpPageState extends State<SignUpPage> {
         centerTitle: true,
       ),
       body: Center(
+
         child: SingleChildScrollView(
           padding: EdgeInsets.all(24.0),
           child: Form(
@@ -80,13 +81,22 @@ class _SignUpPageState extends State<SignUpPage> {
             child: Column(
               //mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Image.asset(
+                  'lib/logo/weather_icon.png',
+                  width: 150, // Set a fixed width
+                  height: 150, // Set a fixed height
+                  fit: BoxFit.contain, // Ensure the image fits within the bounds
+                ),
+                SizedBox(height: 30,),
+                Text('Please Register for more...',style: TextStyle(color: Colors.green,fontWeight: FontWeight.bold, fontSize: 25),),
+                SizedBox(height: 20,),
                 TextFormField(
                   controller: _usernameController,
                   decoration: _inputDecoration('Username', Icons.person),
                   validator: (value) =>
                   value == null || value.isEmpty ? 'Please enter a username' : null,
                 ),
-                SizedBox(height: 16),
+                SizedBox(height: 12),
                 TextFormField(
                   controller: _emailController,
                   decoration: _inputDecoration('Email', Icons.email),
@@ -101,7 +111,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     return null;
                   },
                 ),
-                SizedBox(height: 16),
+                SizedBox(height: 12),
                 TextFormField(
                   controller: _passwordController,
                   decoration: _inputDecoration('Password', Icons.lock),
@@ -116,7 +126,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     return null;
                   },
                 ),
-                SizedBox(height: 16),
+                SizedBox(height: 12),
                 TextFormField(
                   controller: _confirmPasswordController,
                   decoration: _inputDecoration('Confirm Password', Icons.lock_reset),
@@ -131,15 +141,15 @@ class _SignUpPageState extends State<SignUpPage> {
                     return null;
                   },
                 ),
-                SizedBox(height: 16),
+                SizedBox(height: 12),
                 TextFormField(
                   controller: _mobileController,
                   decoration: _inputDecoration('Phone Number (Optional)', Icons.phone),
                   keyboardType: TextInputType.phone,
                 ),
-                SizedBox(height: 32),
+                SizedBox(height: 25),
                 _isLoading
-                    ? const LinearProgressIndicator()
+                    ?  LinearProgressIndicator()
                     : Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -151,14 +161,14 @@ class _SignUpPageState extends State<SignUpPage> {
                         icon: Icon(Icons.arrow_back),
                         label:  Text("Back"),
                         style: OutlinedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 14),
+                          padding:  EdgeInsets.symmetric(vertical: 14),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(width: 16), // Spacing between buttons
+                    SizedBox(width: 14), // Spacing between buttons
                     Expanded(
                       child: ElevatedButton.icon(
                         onPressed: _signUp,
@@ -167,7 +177,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         style: ElevatedButton.styleFrom(
                           foregroundColor: Colors.black, // Text color for contrast
                           backgroundColor: Colors.lightBlue, // Distinct color for sign up
-                          padding: const EdgeInsets.symmetric(vertical: 14),
+                          padding: EdgeInsets.symmetric(vertical: 14),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
