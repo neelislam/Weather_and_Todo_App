@@ -69,16 +69,16 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Sign Up"),
+        title: Text("Sign Up"),
         centerTitle: true,
       ),
       body: Center(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24.0),
+          padding: EdgeInsets.all(24.0),
           child: Form(
             key: _formKey,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              //mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextFormField(
                   controller: _usernameController,
@@ -86,7 +86,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   validator: (value) =>
                   value == null || value.isEmpty ? 'Please enter a username' : null,
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 TextFormField(
                   controller: _emailController,
                   decoration: _inputDecoration('Email', Icons.email),
@@ -101,7 +101,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     return null;
                   },
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 TextFormField(
                   controller: _passwordController,
                   decoration: _inputDecoration('Password', Icons.lock),
@@ -116,7 +116,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     return null;
                   },
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 TextFormField(
                   controller: _confirmPasswordController,
                   decoration: _inputDecoration('Confirm Password', Icons.lock_reset),
@@ -131,15 +131,15 @@ class _SignUpPageState extends State<SignUpPage> {
                     return null;
                   },
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 TextFormField(
                   controller: _mobileController,
                   decoration: _inputDecoration('Phone Number (Optional)', Icons.phone),
                   keyboardType: TextInputType.phone,
                 ),
-                const SizedBox(height: 32),
+                SizedBox(height: 32),
                 _isLoading
-                    ? const CircularProgressIndicator()
+                    ? const LinearProgressIndicator()
                     : Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -148,8 +148,8 @@ class _SignUpPageState extends State<SignUpPage> {
                         onPressed: () {
                           Navigator.pop(context); // Navigate back to sign-in
                         },
-                        icon: const Icon(Icons.arrow_back),
-                        label: const Text("Back"),
+                        icon: Icon(Icons.arrow_back),
+                        label:  Text("Back"),
                         style: OutlinedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 14),
                           shape: RoundedRectangleBorder(
@@ -158,12 +158,12 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                       ),
                     ),
-                    const SizedBox(width: 16), // Spacing between buttons
+                    SizedBox(width: 16), // Spacing between buttons
                     Expanded(
                       child: ElevatedButton.icon(
                         onPressed: _signUp,
-                        icon: const Icon(Icons.person_add),
-                        label: const Text("Sign Up"),
+                        icon: Icon(Icons.person_add),
+                        label:Text("Sign Up"),
                         style: ElevatedButton.styleFrom(
                           foregroundColor: Colors.black, // Text color for contrast
                           backgroundColor: Colors.lightBlue, // Distinct color for sign up

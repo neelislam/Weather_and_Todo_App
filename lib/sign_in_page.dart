@@ -6,7 +6,15 @@ import 'sign_up_page.dart';
 import 'weather_home.dart'; // <-- IMPORTANT: Import weather_home.dart to access ThemeProvider
 
 class SignInPage extends StatefulWidget {
-  const SignInPage({super.key});
+  // Add these two properties
+  final bool isDarkMode;
+  final VoidCallback toggleTheme;
+
+  const SignInPage({
+    super.key,
+    required this.isDarkMode, // Make them required
+    required this.toggleTheme, // Make them required
+  });
 
   @override
   State<SignInPage> createState() => _SignInPageState();
@@ -79,12 +87,22 @@ class _SignInPageState extends State<SignInPage> {
   Widget build(BuildContext context) {
     // Get the current theme mode for dynamic styling
     // Now ThemeProvider is accessed via the weather_home.dart import
-    final isDarkMode = Provider.of<ThemeProvider>(context).isDarkMode;
+    // This line is no longer needed here as isDarkMode is passed via widget
+    // final isDarkMode = Provider.of<ThemeProvider>(context).isDarkMode;
+
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Sign In"),
+        title:  Text("Sign In"),
         centerTitle: true,
+        actions: [
+          IconButton(
+            // Use widget.isDarkMode and widget.toggleTheme directly
+            icon: Icon(widget.isDarkMode ? Icons.light_mode : Icons.dark_mode),
+            onPressed: widget.toggleTheme,
+            tooltip: 'Toggle Theme',
+          ),
+        ],
       ),
       body: Center( // Center the content on the screen
         child: SingleChildScrollView(
@@ -94,6 +112,22 @@ class _SignInPageState extends State<SignInPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center, // Center vertically
               children: [
+                // Simplified Image.network without loadingBuilder and errorBuilder
+                Image.asset(
+                  'lib/logo/weather_icon.png',
+                  width: 150, // Set a fixed width
+                  height: 150, // Set a fixed height
+                  fit: BoxFit.contain, // Ensure the image fits within the bounds
+                ),
+                const SizedBox(height: 20), // Spacing after image
+                const Text(
+                  'Welcome To Weather App',
+                  style: TextStyle(
+                    color: Colors.green,
+                    fontSize: 24, // Increased font size for welcome text
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 const SizedBox(height: 40), // Spacing from top
                 TextFormField(
                   controller: _emailController,
@@ -104,7 +138,8 @@ class _SignInPageState extends State<SignInPage> {
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     filled: true,
-                    fillColor: isDarkMode ? Colors.grey[800] : Colors.grey[200],
+                    // Use widget.isDarkMode here
+                    fillColor: widget.isDarkMode ? Colors.grey[800] : Colors.grey[200],
                   ),
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
@@ -127,7 +162,8 @@ class _SignInPageState extends State<SignInPage> {
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     filled: true,
-                    fillColor: isDarkMode ? Colors.grey[800] : Colors.grey[200],
+                    // Use widget.isDarkMode here
+                    fillColor: widget.isDarkMode ? Colors.grey[800] : Colors.grey[200],
                   ),
                   obscureText: true,
                   validator: (value) {
@@ -142,7 +178,7 @@ class _SignInPageState extends State<SignInPage> {
                 ),
                 const SizedBox(height: 30), // Spacing before buttons
                 _isLoading
-                    ? const CircularProgressIndicator() // Show loading indicator
+                    ? const LinearProgressIndicator() // Show loading indicator
                     : Column(
                   children: [
                     SizedBox(
@@ -150,8 +186,9 @@ class _SignInPageState extends State<SignInPage> {
                       child: ElevatedButton(
                         onPressed: _signIn,
                         style: ElevatedButton.styleFrom(
-                          foregroundColor: isDarkMode ? Colors.white : Colors.black,
-                          backgroundColor: isDarkMode ? Colors.blueAccent : Colors.lightBlue,
+                          // Use widget.isDarkMode here
+                          foregroundColor: widget.isDarkMode ? Colors.white : Colors.black,
+                          backgroundColor: widget.isDarkMode ? Colors.blueAccent : Colors.lightBlue,
                           padding: const EdgeInsets.symmetric(vertical: 16.0),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),

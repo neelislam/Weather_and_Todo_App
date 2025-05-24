@@ -32,12 +32,12 @@ class ThemeProvider with ChangeNotifier {
       brightness: Brightness.light,
     ),
     appBarTheme: AppBarTheme(
-      backgroundColor: Colors.orangeAccent,
+      backgroundColor: Colors.blueAccent,
       foregroundColor: Colors.black,
       elevation: 25,
     ),
     cardColor: Colors.redAccent, // Existing card color for light mode
-    scaffoldBackgroundColor: Colors.blueGrey,
+    scaffoldBackgroundColor: Colors.white,
     // buttonTheme: ButtonThemeData(
     //   buttonColor: Colors.red,
     //   textTheme: ButtonTextTheme.primary,
@@ -340,7 +340,7 @@ class _WeatherHomeState extends State<WeatherHome> {
 
           // Add button to navigate to ToDoList
           IconButton(
-            icon: const Icon(Icons.list_alt), // Icon for the to-do list
+            icon: Icon(Icons.list_alt), // Icon for the to-do list
             onPressed: _navigateToToDoList,
             tooltip: 'ToDo List',
           ),
@@ -351,20 +351,20 @@ class _WeatherHomeState extends State<WeatherHome> {
             tooltip: 'Toggle Theme',
           ),
           IconButton(
-            icon: const Icon(Icons.logout),
+            icon: Icon(Icons.logout),
             onPressed: _signOut,
             tooltip: 'Sign Out',
           ),
         ],
       ),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator()) // Show loading indicator
+          ? Center(child: LinearProgressIndicator())
           : RefreshIndicator(
         //Allows pull-to-refresh functionality
         onRefresh:
         _city.isEmpty ? _getCurrentLocationWeather : _fetchWeatherByCity,
         child: SingleChildScrollView(
-          physics:  AlwaysScrollableScrollPhysics(), // Ensures scroll ability even if content fits
+          physics:  AlwaysScrollableScrollPhysics(), //Ensures scroll ability even if content fits
           padding:  EdgeInsets.all(24.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

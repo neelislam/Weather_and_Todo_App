@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart'; // Import shared_preferences
-import 'dart:convert'; // For JSON encoding/decoding
-
-// Represents a single reminder (using Contact-like structure)
+import 'dart:convert';
+//Represents a single reminder (using Contact-like structure)
 class Reminder {
   final String title;
   final String description;
-
   Reminder(this.title, this.description);
-
-  // Convert a Reminder object to a JSON map
+  //Convert a Reminder object to a JSON map
   Map<String, dynamic> toJson() => {
     'title': title,
     'description': description,
   };
-
-  // Create a Reminder object from a JSON map
+  //Create a Reminder object from a JSON map
   factory Reminder.fromJson(Map<String, dynamic> json) {
     return Reminder(
       json['title'] as String,
@@ -23,8 +19,7 @@ class Reminder {
     );
   }
 }
-
-// The main StatefulWidget for the Reminders application
+//The main StatefulWidget for the Reminders application
 class toDolist extends StatefulWidget {
   const toDolist({super.key});
 
